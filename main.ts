@@ -32,9 +32,8 @@ async function ghPinnedRepos(username: string) {
     const repo = getRepo($, item);
     const link = "https://github.com/" + (owner || username) + "/" + repo;
     const description = getDescription($, item);
-    const image = `https://opengraph.githubassets.com/1/${
-      owner || username
-    }/${repo}`;
+    const image = `https://opengraph.githubassets.com/1/${owner || username
+      }/${repo}`;
     const website = await getWebsite(link);
     const language = getLanguage($, item);
     const languageColor = getLanguageColor($, item);
@@ -202,22 +201,23 @@ async function handler(request: Request): Promise<Response> {
 
     return new Response(
       `
-    <head>
-      <meta charset="utf-8" />
-      <title>GitHub pinned repos API</title>
-    </head>
-    <style>body {font-family: Helvetica, serif;margin: 30px;}</style>
-    <p>GET /?username=GITHUB_USERNAME</p>
+      <head>
+        <meta charset="utf-8" />
+        <title>GitHub pinned repos API</title>
+      </head>
+      <style>body {font-family: Helvetica, serif;margin: 30px;}</style>
+      <p>GET /?username=GITHUB_USERNAME</p>
 
-    <p>
-      <form action="/">
-        <input type="text" name="username" placeholder="username" />
-        <button type="submit">Go!</button>
-      </form>
-    </p>
+      <p>
+        <form action="/">
+          <input type="text" name="username" placeholder="username" />
+          <button type="submit">Go!</button>
+        </form>
+      </p>
 
-    <p>made by <a href="https://github.com/egoist">@egoist</a> · <a href="https://github.com/egoist/gh-pinned-repos">source code</a></p>
-  `,
+      <p>made by <a href="https://github.com/egoist">@egoist</a> · <a href="https://github.com/egoist/gh-pinned-repos">source code</a></p>
+      <p>forked by <a href="https://github.com/Arlind-dev/">@arlind-dev</a> · <a href="https://github.com/Arlind-dev/gh-pinned-repos">source code</a></p>
+    `,
       { headers }
     );
   }
@@ -231,7 +231,7 @@ async function handler(request: Request): Promise<Response> {
       .then((data) => {
         cache.set(username, data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   } else {
     result = await ghPinnedRepos(username);
     cache.set(username, result);
